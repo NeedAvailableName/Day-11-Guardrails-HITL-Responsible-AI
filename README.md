@@ -119,13 +119,31 @@ python hitl/hitl.py
 | 12 | Confidence Router (HITL) | Python |
 | 13 | Design 3 HITL decision points | Design |
 
+
+## Assignment 11: Production Defense-in-Depth Pipeline
+
+As part of the final assignment, we implemented a complete **Defense-in-Depth** pipeline with multiple independent safety layers.
+
+### Added Components
+
+1.  **Rate Limiter**: Implemented a sliding window (10 requests/60s) to prevent API abuse and DDoS attacks.
+2.  **Input Guardrails**: Reinforced regex-based injection detection for multiple languages (English & Vietnamese).
+3.  **Output Guardrails**: Comprehensive PII filter for phone numbers, emails, IDs, and secrets.
+4.  **LLM-as-Judge**: An automated QA layer using Gemini (1.5-flash) to evaluate responses across **Safety, Relevance, Accuracy, and Tone**.
+5.  **Audit Log**: Real-time logging of all security events to `src/audit_log.json`.
+6.  **Monitoring**: Threshold-based alerting system for abnormal block rates.
+
+### How to use the Production Pipeline
+
+1.  **Notebook**: Open `notebooks/assignment11_production_pipeline.ipynb`. This notebook contains the full implementation and four automated test suites (Safe, Attack, Rate Limit, Edge Cases).
+2.  **Audit Logs**: After running tests, check `src/audit_log.json` to see the forensics data.
+3.  **Modular Code**: Reusable plugins are located in `src/core/plugins.py`.
+
 ## References
 
 - [OWASP Top 10 for LLM](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 - [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails)
 - [Google ADK Documentation](https://google.github.io/adk-docs/)
-- [Official Google's Gemini cookbook](https://github.com/google-gemini/cookbook/blob/main/examples/gemini_google_adk_model_guardrails.ipynb)
 - [AI Safety Fundamentals](https://aisafetyfundamentals.com/)
-- [AI Red Teaming Guide](https://github.com/requie/AI-Red-Teaming-Guide)
 - [antoan.ai - AI Safety Vietnam](https://antoan.ai)
 
